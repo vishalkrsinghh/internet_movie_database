@@ -17,11 +17,11 @@
     <style>
         button {
             float: right;
-            margin-top: 70px;
+            margin-top: 40px;
         }
 
         #search {
-            margin-top: 70px;
+            margin-top: 40px;
         }
 
         #div2 {
@@ -37,9 +37,10 @@
         }
 
         .alert {
-            position: absolute;
+            position: sticky;
             width: 100%;
-            z-index: -11;
+            z-index: 10;
+            top: -1px;
         }
 
         .container {
@@ -49,7 +50,23 @@
 
         .container::-webkit-scrollbar {
             scroll-snap-type: none;
-            /* scrollbar-face-color: aqua; */
+            scrollbar-face-color: aqua;
+        } 
+
+        #div2 {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 7%;
+            justify-content: center;
+        }
+
+        p {
+            margin-bottom: 0.1rem;
+        }
+
+        .delete {
+            width: 100% !important;
         }
     </style>
 </head>
@@ -62,13 +79,16 @@
     <div class="alert alert-danger alert2 text-center" role="alert">
         One item deleted from Favoutite.
     </div>
-    <input type="text" name="" id="search" placeholder="Search Movie name">
-    <button value="Fav" id="favrte"> Favoutite</button>
+    <button value="Fav" id="favrte">Favourite</button>
     <!-- <input type="button" value="Search" id="button"> -->
-    <div id="div"> </div>
+
+    <div class="main">
+        <input type="text" name="" id="search" placeholder="Search Movie name">
+        <div id="div"> </div>
+    </div>
     <div id="div2"> </div>
 
-    <main class="main">
+    <main>
         <!-- <h4>Top Rated Movies</h4> -->
         <div class="container d-flex flex-wrap gap-5 justify-content-center my-4"></div>
         <!-- <h4>Avengers Movies</h4> -->
@@ -168,7 +188,7 @@
                             <div class="card-body">
                                 <h5 >Movie:- ${data.Title}</h5>
                                 <h6 >Language:- ${data.Language}</h6>
-                                <p class="card-text"> ${data.Plot.slice(0, 100)}........</p>
+                                <p class="card-text"> ${data.Plot.slice(0, 100)}  <a href="movieDetailPage.html" class="mvpg" style="text-decoration:none;">Read more....</a></p>
                                 <a href="#" class="btn btn-primary">Add To Favoutite</a>
                             </div>
                     </div>`
@@ -227,23 +247,20 @@
             }
         }
 
-
+        let main = document.getElementsByClassName("main")[0]
         let favrte = document.getElementById("favrte");
         let y = 0;
         let favShow = function () {
             console.log(localLength);
             y++;
-
             if (localLength > 0 && y == 1) {
-                div2.style.display = "block";
                 console.log("hieieie")
                 for (let i = 0; i < localLength; i++) {
                     // console.log(addInLocStr)
-                    div2.innerHTML += `<div class="card card2" style="width: 8rem;">
+                    div2.innerHTML += `<div class="card card2" style="width: 13rem; margin-top: 2rem; justify-content: center;">
                             <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="..." width="120px" height="180px">
                                
                                     <p><strong>Movie:-</strong><span class="card-title">${addInLocStr[i].Title}</span></p>
-                                    <p ><strong>Language:-</strong> ${addInLocStr[i].Language}</p>
                                     <p class="card-text"><strong>Country:-</strong> ${addInLocStr[i].Country}</p>
                                     <p class="card-text"><strong>Duration:-</strong> ${addInLocStr[i].Duration}</p>
                                     <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete</a>
@@ -251,11 +268,20 @@
                         </div>`
                 }
             }
-            else if (div2.style.display == "block") {
+            else if (div2.style.display == "flex") {
                 console.log("wewewe")
                 div2.innerHTML = "";
                 div2.style.display = "none";
                 y = 0;
+            }
+
+            if (favrte.innerText == "Favourite") {
+                favrte.innerText = `X`;
+                main.style.display = "none"
+                div2.style.display = "flex";
+            } else {
+                favrte.innerText = `Favourite`
+                main.style.display = "block"
             }
 
             let deletee = document.getElementsByClassName("delete");
