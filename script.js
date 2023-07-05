@@ -20,6 +20,7 @@ if (localStorage.getItem("arr2") == null) {
     localStorage.setItem("arr2", "[0]");
 }
 let localLength = JSON.parse(localStorage.getItem("arr")).length;
+let div = document.getElementById("div");
 let div2 = document.getElementById("div2");
 let container = document.getElementsByClassName("container");
 
@@ -67,12 +68,22 @@ let searchF = async () => {
     url = `https://www.omdbapi.com/?t=${searchVal}&plot=full&apikey=ae64b988`;
 
     // console.log(searchVal)
-    await xhr.open("get", url, true);
+    xhr.open("get", url, true);
     xhr.send();
-    xhr.onload = () => {
+    xhr.onload = await function () {
         data = xhr.responseText;
         data = JSON.parse(data)
         mainObj = data.Poster;
+        // console.log(typeof data);
+        if (data.Response == "False" || mainObj == "N/A") {
+            if (mainObj == "N/A" && data.Response != "False") {
+                // console.log("movie found but didnt get poster/thumbnail")
+                div.innerHTML = `<b> Movie found but didn't get poster/thumbnail(image) or more about the movie.</b>`;
+            } else {
+                // console.log("haa")
+                div.innerHTML = `<h2>${data.Error}</h2>`;
+            }
+        }
         if (search.value == "") {
             div.style.display = "none";
         } else {
@@ -81,9 +92,9 @@ let searchF = async () => {
         // console.log(mainObj + " " + typeof mainObj);
         if (mainObj != undefined && mainObj != "N/A") {
             // console.log(searchVal);
-            let div = document.getElementById("div");
+
             div.innerHTML = `<div class="card card1" style="width: 18rem;">
-                       <a href="movieDetailPage.html" class="mvpg"> <img src="${mainObj}" title="${data.Title}" class="card-img-top" alt="..." width="230px" height="300px"> </a>
+                       <a href="movieDetailPage.html" class="mvpg"> <img src="${mainObj}" title="${data.Title}" class="card-img-top" alt="${data.Title}" width="230px" height="300px"> </a>
                             <div class="card-body">
                                 <h5 >Movie:- ${data.Title}</h5>
                                 <h6 >Language:- ${data.Language}</h6>
@@ -101,10 +112,7 @@ let searchF = async () => {
                 moviePage.splice(0, 1, { "Poster": data.Poster, "Title": data.Title, "Language": data.Language, "Country": data.Country, "Duration": data.Runtime, "Actors": data.Actors, "Writer": data.Writer, "Director": data.Director, "Awards": data.Awards, "Released": data.Released, "Plot": data.Plot });
                 localStorage.setItem("arr2", JSON.stringify(moviePage));
             }
-            for (let i = 0; i < mvpg.length; i++) {
-                // let Q = data;
-                mvpg[i].addEventListener("click", addinLocal);
-            }
+            mvpg[0].addEventListener("click", addinLocal);
 
             let favbtn = document.getElementsByClassName("btn-primary")[0];
             let x = 0;
@@ -113,7 +121,8 @@ let searchF = async () => {
                 event.preventDefault();
                 x++;
 
-                addInLocStr.push({ "Poster": data.Poster, "Title": data.Title, "Language": data.Language, "Country": data.Country, "Duration": data.Runtime });
+                // addInLocStr.push({ "Poster": data.Poster, "Title": data.Title, "Language": data.Language, "Country": data.Country, "Duration": data.Runtime, "Plot":data.Plot });
+                addInLocStr.push(data);
 
                 addInLocStr = [...new Map(addInLocStr.map((m) => [m.Title, m])).values()];
 
@@ -151,27 +160,39 @@ let favrte = document.getElementById("favrte");
 let y = 0;
 let favShow = function () {
     console.log(localLength);
+    // console.log(addInLocStr[0]);
     y++;
     if (localLength > 0 && y == 1) {
-        console.log("hieieie")
+        // console.log("hieieie")
         for (let i = 0; i < localLength; i++) {
             // console.log(addInLocStr)
             div2.innerHTML += `<div class="card card2" style="width: 13rem; margin-top: 2rem; justify-content: center;">
-                            <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="..." width="120px" height="180px">
+            <a href="movieDetailPage.html" class="mvpg"> <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="${addInLocStr[i].Title}" width="120px" height="180px" title="${addInLocStr[i].Title}"></a>
                                
                                     <p><strong>Movie:-</strong><span class="card-title">${addInLocStr[i].Title}</span></p>
                                     <p class="card-text"><strong>Country:-</strong> ${addInLocStr[i].Country}</p>
-                                    <p class="card-text"><strong>Duration:-</strong> ${addInLocStr[i].Duration}</p>
+                                    <p class="card-text"><strong>Duration:-</strong> ${addInLocStr[i].Runtime}</p>
                                     <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete</a>
                                 
                         </div>`
         }
     }
     else if (div2.style.display == "flex") {
-        console.log("wewewe")
+        // console.log("wewewe")
         div2.innerHTML = "";
         div2.style.display = "none";
         y = 0;
+    }
+
+    let mvpg = document.getElementsByClassName("mvpg");
+
+    for (let i = 0; i < mvpg.length; i++) {
+        mvpg[i].onclick = function () {
+
+            console.log(i, " ", " is click");
+            moviePage.splice(0, 1, { "Poster": addInLocStr[i].Poster, "Title": addInLocStr[i].Title, "Language": addInLocStr[i].Language, "Country": addInLocStr[i].Country, "Duration": addInLocStr[0].Runtime, "Actors": addInLocStr[i].Actors, "Writer": addInLocStr[i].Writer, "Director": addInLocStr[i].Director, "Awards": addInLocStr[i].Awards, "Released": addInLocStr[i].Released, "Plot": addInLocStr[i].Plot });
+            localStorage.setItem("arr2", JSON.stringify(moviePage));
+        }
     }
 
     if (favrte.innerText == "Favourite") {
@@ -192,7 +213,7 @@ let favShow = function () {
                 // console.log(j);
                 addInLocStr.splice(j, 1);
                 localLength--;
-                console.log(localLength);
+                // console.log(localLength);
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
             };
         }
