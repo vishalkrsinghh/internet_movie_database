@@ -219,8 +219,8 @@ let favShow = function () {
                 // localLength--;
                 // console.log(localLength);
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
-                // window.location.reload();
-                j=0;
+                window.location.reload();
+                // j=0;
             };
         }
         // console.log(arr);
