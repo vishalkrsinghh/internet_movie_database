@@ -19,7 +19,7 @@ if (localStorage.getItem("arr2") == null) {
 
     localStorage.setItem("arr2", "[0]");
 }
-let localLength = JSON.parse(localStorage.getItem("arr")).length;
+// let localLength = JSON.parse(localStorage.getItem("arr")).length;
 let div = document.getElementById("div");
 let div2 = document.getElementById("div2");
 let container = document.getElementsByClassName("container");
@@ -61,8 +61,8 @@ let xmlHttpreq = (url, cont) => {
 // xmlHttpreq(url3, 1);
 // xmlHttpreq(url4, 2);
 
-let Q;
-let searchF = async () => {
+// let Q;
+let searchF =  () => {
     searchVal = search.value;
     let xhr = new XMLHttpRequest();
     url = `https://www.omdbapi.com/?t=${searchVal}&plot=full&apikey=ae64b988`;
@@ -70,7 +70,7 @@ let searchF = async () => {
     // console.log(searchVal)
     xhr.open("get", url, true);
     xhr.send();
-    xhr.onload = await function () {
+    xhr.onload = function () {
         data = xhr.responseText;
         data = JSON.parse(data)
         mainObj = data.Poster;
@@ -112,14 +112,14 @@ let searchF = async () => {
                 moviePage.splice(0, 1, { "Poster": data.Poster, "Title": data.Title, "Language": data.Language, "Country": data.Country, "Duration": data.Runtime, "Actors": data.Actors, "Writer": data.Writer, "Director": data.Director, "Awards": data.Awards, "Released": data.Released, "Plot": data.Plot });
                 localStorage.setItem("arr2", JSON.stringify(moviePage));
             }
-            mvpg[0].addEventListener("click", addinLocal);
+            for(let i=0; i<mvpg.length; i++){
+                mvpg[i].addEventListener("click", addinLocal);
+            }
 
             let favbtn = document.getElementsByClassName("btn-primary")[0];
-            let x = 0;
 
             let add = (event) => {
                 event.preventDefault();
-                x++;
 
                 // addInLocStr.push({ "Poster": data.Poster, "Title": data.Title, "Language": data.Language, "Country": data.Country, "Duration": data.Runtime, "Plot":data.Plot });
                 addInLocStr.push(data);
@@ -127,7 +127,7 @@ let searchF = async () => {
                 addInLocStr = [...new Map(addInLocStr.map((m) => [m.Title, m])).values()];
 
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
-                localLength = addInLocStr.length;
+                // localLength = addInLocStr.length;
 
                 favbtn.style.background = "red";
                 favbtn.innerText = "Added";
@@ -155,19 +155,19 @@ let searchF = async () => {
     }
 }
 
-let main = document.getElementsByClassName("main")[0]
+let main = document.getElementsByClassName("main")
 let favrte = document.getElementById("favrte");
 let y = 0;
 let favShow = function () {
-    console.log(localLength);
+    // console.log(localLength);
     // console.log(addInLocStr[0]);
     y++;
-    if (localLength > 0 && y == 1) {
+    if (addInLocStr.length > 0 && y == 1) {
         // console.log("hieieie")
-        for (let i = 0; i < localLength; i++) {
+        for (let i = 0; i < addInLocStr.length; i++) {
             // console.log(addInLocStr)
             div2.innerHTML += `<div class="card card2" style="width: 13rem; margin-top: 2rem; justify-content: center;">
-            <a href="movieDetailPage.html" class="mvpg"> <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="${addInLocStr[i].Title}" width="120px" height="180px" title="${addInLocStr[i].Title}"></a>
+            <a href="movieDetailPage.html" class="mvpgg"> <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="${addInLocStr[i].Title}" width="120px" height="180px" title="${addInLocStr[i].Title}"></a>
                                
                                     <p><strong>Movie:-</strong><span class="card-title">${addInLocStr[i].Title}</span></p>
                                     <p class="card-text"><strong>Country:-</strong> ${addInLocStr[i].Country}</p>
@@ -184,10 +184,10 @@ let favShow = function () {
         y = 0;
     }
 
-    let mvpg = document.getElementsByClassName("mvpg");
+    let mvpgg = document.getElementsByClassName("mvpgg");
 
-    for (let i = 0; i < mvpg.length; i++) {
-        mvpg[i].onclick = function () {
+    for (let i = 0; i < mvpgg.length; i++) {
+        mvpgg[i].onclick = function () {
 
             console.log(i, " ", " is click");
             moviePage.splice(0, 1, { "Poster": addInLocStr[i].Poster, "Title": addInLocStr[i].Title, "Language": addInLocStr[i].Language, "Country": addInLocStr[i].Country, "Duration": addInLocStr[0].Runtime, "Actors": addInLocStr[i].Actors, "Writer": addInLocStr[i].Writer, "Director": addInLocStr[i].Director, "Awards": addInLocStr[i].Awards, "Released": addInLocStr[i].Released, "Plot": addInLocStr[i].Plot });
@@ -197,11 +197,15 @@ let favShow = function () {
 
     if (favrte.innerText == "Favourite") {
         favrte.innerText = `X`;
-        main.style.display = "none"
+        for (let i = 0; i < main.length; i++) {
+            main[i].style.display = "none"
+        }
         div2.style.display = "flex";
     } else {
         favrte.innerText = `Favourite`
-        main.style.display = "block"
+        for (let i = 0; i < main.length; i++) {
+            main[i].style.display = "block"
+        }
     }
 
     let deletee = document.getElementsByClassName("delete");
@@ -212,9 +216,11 @@ let favShow = function () {
             card2[j].onclick = function () {
                 // console.log(j);
                 addInLocStr.splice(j, 1);
-                localLength--;
+                // localLength--;
                 // console.log(localLength);
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
+                // window.location.reload();
+                j=0;
             };
         }
         // console.log(arr);
