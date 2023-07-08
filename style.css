@@ -1,15 +1,23 @@
 
         button {
             float: right;
-            margin-top: 40px;
+            margin-top: 60px;
         }
 
         #search {
-            margin-top: 40px;
+            margin-top: 60px;
         }
 
-        #div2 {
-            display: none;
+        /* write media Query for .main */
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        a.btn.btn-primary {
+            display: flex;
+            justify-content: center;
         }
 
         .alert1 {
@@ -21,7 +29,7 @@
         }
 
         .alert {
-            position: sticky;
+            position: absolute;
             width: 100%;
             z-index: 10;
             top: -1px;
@@ -44,7 +52,9 @@
             gap: 7%;
             justify-content: center;
         }
-
+        #div {
+            margin-top: 15px;
+        }
         p {
             margin-bottom: 0.1rem;
         }

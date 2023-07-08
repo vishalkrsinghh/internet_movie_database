@@ -62,7 +62,7 @@ let xmlHttpreq = (url, cont) => {
 // xmlHttpreq(url4, 2);
 
 // let Q;
-let searchF =  () => {
+let searchF = () => {
     searchVal = search.value;
     let xhr = new XMLHttpRequest();
     url = `https://www.omdbapi.com/?t=${searchVal}&plot=full&apikey=ae64b988`;
@@ -71,6 +71,7 @@ let searchF =  () => {
     xhr.open("get", url, true);
     xhr.send();
     xhr.onload = function () {
+        // console.log(addInLocStr.length);
         data = xhr.responseText;
         data = JSON.parse(data)
         mainObj = data.Poster;
@@ -112,7 +113,7 @@ let searchF =  () => {
                 moviePage.splice(0, 1, { "Poster": data.Poster, "Title": data.Title, "Language": data.Language, "Country": data.Country, "Duration": data.Runtime, "Actors": data.Actors, "Writer": data.Writer, "Director": data.Director, "Awards": data.Awards, "Released": data.Released, "Plot": data.Plot });
                 localStorage.setItem("arr2", JSON.stringify(moviePage));
             }
-            for(let i=0; i<mvpg.length; i++){
+            for (let i = 0; i < mvpg.length; i++) {
                 mvpg[i].addEventListener("click", addinLocal);
             }
 
@@ -128,9 +129,21 @@ let searchF =  () => {
 
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
                 // localLength = addInLocStr.length;
-
+                // console.log(addInLocStr.length);
                 favbtn.style.background = "red";
-                favbtn.innerText = "Added";
+                favbtn.innerHTML = `<span>Added</span> <lord-icon
+                src="https://cdn.lordicon.com/egiwmiit.json"
+                trigger="loop"
+                delay="1000"
+                colors="primary:white"
+                state="morph-check-in"
+                style="width:20px;height:20px">
+                </lord-icon>`;
+
+                // favbtn.style.display = "flex"
+                favbtn.style.gap= "5%";
+                favbtn.style.alignItems="center";
+                // favbtn.style.justifyContent= "center";
 
                 let k = 0;
                 let id = setInterval(() => {
@@ -139,7 +152,7 @@ let searchF =  () => {
                     document.getElementsByClassName("alert2")[0].style.display = "none";
                     clearInterval(idd2);
                     k++;
-                    if (k == 35) {
+                    if (k == 9) {
                         document.getElementsByClassName("alert1")[0].style.display = "none";
                         clearInterval(id);
                     } else {
@@ -159,7 +172,7 @@ let main = document.getElementsByClassName("main")
 let favrte = document.getElementById("favrte");
 let y = 0;
 let favShow = function () {
-    // console.log(localLength);
+    // console.log(addInLocStr.length);
     // console.log(addInLocStr[0]);
     y++;
     if (addInLocStr.length > 0 && y == 1) {
@@ -188,7 +201,7 @@ let favShow = function () {
 
     for (let i = 0; i < mvpgg.length; i++) {
         mvpgg[i].onclick = function () {
-
+            // event.preventDefault();
             console.log(i, " ", " is click");
             moviePage.splice(0, 1, { "Poster": addInLocStr[i].Poster, "Title": addInLocStr[i].Title, "Language": addInLocStr[i].Language, "Country": addInLocStr[i].Country, "Duration": addInLocStr[0].Runtime, "Actors": addInLocStr[i].Actors, "Writer": addInLocStr[i].Writer, "Director": addInLocStr[i].Director, "Awards": addInLocStr[i].Awards, "Released": addInLocStr[i].Released, "Plot": addInLocStr[i].Plot });
             localStorage.setItem("arr2", JSON.stringify(moviePage));
@@ -196,54 +209,65 @@ let favShow = function () {
     }
 
     if (favrte.innerText == "Favourite") {
-        favrte.innerText = `X`;
+        favrte.innerHTML = `  <lord-icon
+            src="https://cdn.lordicon.com/nhfyhmlt.json"
+            trigger="loop"
+            delay="500"
+            colors="primary:#121331"
+            style="width:50px;height:2.5rem" title="click me">
+        </lord-icon>`;
+        favrte.style.background = "transparent"
+        favrte.style.border = "none"
+        favrte.style.position = "fixed"
+        favrte.style.top = "60"
+        favrte.style.right = "-13px"
         for (let i = 0; i < main.length; i++) {
             main[i].style.display = "none"
         }
         div2.style.display = "flex";
     } else {
         favrte.innerText = `Favourite`
+        favrte.style.background = ""
+        favrte.style.border = ""
+        favrte.style.position = ""
         for (let i = 0; i < main.length; i++) {
-            main[i].style.display = "block"
+            main[i].style.display = "flex"
         }
     }
 
     let deletee = document.getElementsByClassName("delete");
     let del = function (event) {
         event.preventDefault();
-        let card2 = document.getElementsByClassName("card2");
-        for (let j = 0; j < card2.length; j++) {
-            card2[j].onclick = function () {
-                // console.log(j);
+        for (let j = 0; j < deletee.length; j++) {
+            deletee[j].onclick = function () {
                 addInLocStr.splice(j, 1);
                 // localLength--;
                 // console.log(localLength);
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
-                window.location.reload();
+                // window.location.reload();
+                this.parentNode.remove();
                 // j=0;
+
+                let m = 0;
+                let id2 = setInterval(() => {
+                    // console.log("delete");
+                    clearInterval(idd1);
+                    idd2 = id2;
+                    document.getElementsByClassName("alert1")[0].style.display = "none";
+                    m++;
+                    if (m == 9) {
+                        document.getElementsByClassName("alert2")[0].style.display = "none";
+                        clearInterval(id2);
+                    } else {
+
+                        document.getElementsByClassName("alert2")[0].style.display = "block";
+                    }
+                }, 200)
             };
         }
-        // console.log(arr);
-        this.parentNode.remove();
-
-        let m = 0;
-        let id2 = setInterval(() => {
-            // console.log("delete");
-            clearInterval(idd1);
-            idd2 = id2;
-            document.getElementsByClassName("alert1")[0].style.display = "none";
-            m++;
-            if (m == 35) {
-                document.getElementsByClassName("alert2")[0].style.display = "none";
-                clearInterval(id2);
-            } else {
-
-                document.getElementsByClassName("alert2")[0].style.display = "block";
-            }
-        }, 200)
     }
-    for (let i = 0; i < deletee.length; i++) {
 
+    for (let i = 0; i < deletee.length; i++) {
         deletee[i].addEventListener("click", del);
     }
 
