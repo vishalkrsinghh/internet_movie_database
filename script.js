@@ -256,9 +256,7 @@ let favShow = function () {
     }
     if (search.value != "") {
         main2.style.display="none"
-    } else {
-        main2.style.display="block"
-    }
+    } 
 
     let deletee = document.getElementsByClassName("delete");
     let del = function (event) {
