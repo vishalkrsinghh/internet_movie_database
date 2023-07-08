@@ -3,6 +3,7 @@
 let search = document.getElementById("search");
 let year = document.getElementById("year");
 let button = document.getElementById("button");
+let main2 =document.getElementById("main2")
 let searchVal;
 let url;
 let yearVal = null;
@@ -29,7 +30,7 @@ let url3 = "https://www.omdbapi.com/?s=avenger&page=1&type=movie&apikey=ae64b988
 let url4 = "https://www.omdbapi.com/?s=hulk&page=1&type=movie&apikey=ae64b988";
 
 
-let xmlHttpreq = (url, cont) => {
+let xmlHttpreq = (url, cont,abc) => {
 
     let xhr = new XMLHttpRequest();
     xhr.open("get", url, true);
@@ -45,21 +46,34 @@ let xmlHttpreq = (url, cont) => {
             if (data2.Search[i].Poster != "N/A") { // Title, Year,Poster
 
                 container[cont].innerHTML += `<div class="card" style="width: 12rem;">
-                            <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px">
+                <a href="movieDetailPage.html" class="${abc}"> <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px"></a>
                                 <div class="card-body">
                                     <h6 >Movie:- <span id="span1">${mainObj[i].Title}</span></h6>
                                     <h6 >Year:- <span id="span2">${mainObj[i].Year}</span></h6>
-                                    <a href="#" class="btn btn-primary addd">Add To Favoutite</a>
+                                   <!-- <a href="#" class="btn btn-primary addd">Add To Favoutite</a> -->
                                 </div>
                         </div>`
             }
         }
 
+        let mvp = document.getElementsByClassName(`${abc}`);
+        for (let i = 0; i < mvp.length; i++) {
+            // mvp[i].addEventListener("click", addinLocal);
+            mvp[i].onclick=function(){
+                // event.preventDefault();
+                moviePage.splice(0, 1, { "Poster": data2.Search[i].Poster, "Title": data2.Search[i].Title, "Type": data2.Search[i].Type, "Year": data2.Search[i].Year });
+                localStorage.setItem("arr2", JSON.stringify(moviePage));
+                console.log(i," ", " is click")
+                // console.log( Object.keys(moviePage[0]).length)
+            }
+        }
+        // console.log(mvp.length)
+
     }
 }
-// xmlHttpreq(url2, 0);
-// xmlHttpreq(url3, 1);
-// xmlHttpreq(url4, 2);
+xmlHttpreq(url2, 0,"i");
+xmlHttpreq(url3, 1,"ii");
+xmlHttpreq(url4, 2,"iii");
 
 // let Q;
 let searchF = () => {
@@ -87,8 +101,10 @@ let searchF = () => {
         }
         if (search.value == "") {
             div.style.display = "none";
+            main2.style.display="block"
         } else {
             div.style.display = "block";
+            main2.style.display="none"
         }
         // console.log(mainObj + " " + typeof mainObj);
         if (mainObj != undefined && mainObj != "N/A") {
@@ -225,14 +241,23 @@ let favShow = function () {
             main[i].style.display = "none"
         }
         div2.style.display = "flex";
+        main2.style.display="none"
     } else {
         favrte.innerText = `Favourite`
         favrte.style.background = ""
         favrte.style.border = ""
-        favrte.style.position = ""
+        favrte.style.position = "absolute"
+        favrte.style.top = "60"
+        favrte.style.right = "0px"
         for (let i = 0; i < main.length; i++) {
             main[i].style.display = "flex"
         }
+        main2.style.display="block"
+    }
+    if (search.value != "") {
+        main2.style.display="none"
+    } else {
+        main2.style.display="block"
     }
 
     let deletee = document.getElementsByClassName("delete");
