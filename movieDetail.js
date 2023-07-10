@@ -9,7 +9,7 @@ if(Object.keys(getLocalDetail[0]).length==4 || Object.keys(getLocalDetail[0]).le
   cont.innerHTML = `<div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0" style="align-items: center;">
       <div class="col-md-4">
-        <img src="${getLocalDetail[0].Poster}" class="img-fluid rounded-start imgf" alt="..." height="100%">
+        <img src="${getLocalDetail[0].Poster}" class="img-fluid rounded-start imgf" alt="..." height="100%" title="${getLocalDetail[0].Title}">
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -26,7 +26,7 @@ else{
   cont.innerHTML = `<div class="card mb-3" style="max-width: 540px;">
       <div class="row g-0" style="align-items: center;">
         <div class="col-md-4">
-          <img src="${getLocalDetail[0].Poster}" class="img-fluid rounded-start imgf" alt="..." height="100%">
+          <img src="${getLocalDetail[0].Poster}" class="img-fluid rounded-start imgf" alt="..." height="100%" title="${getLocalDetail[0].Title}">
         </div>
         <div class="col-md-8">
           <div class="card-body">

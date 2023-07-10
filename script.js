@@ -28,6 +28,10 @@ let container = document.getElementsByClassName("container");
 let url2 = "https://www.omdbapi.com/?s=batman&page=1&type=movie&apikey=ae64b988";
 let url3 = "https://www.omdbapi.com/?s=avenger&page=1&type=movie&apikey=ae64b988";
 let url4 = "https://www.omdbapi.com/?s=hulk&page=1&type=movie&apikey=ae64b988";
+let url5 = "https://www.omdbapi.com/?s=shinchan&page=1&type=movie&apikey=ae64b988";
+let url6 = "https://www.omdbapi.com/?s=doraemon&page=1&type=movie&apikey=ae64b988";
+// https://www.omdbapi.com/?s=tom%20and%20jerry&page=1&type=movie&apikey=ae64b988
+let url7 = "https://www.omdbapi.com/?s=ice%20age&page=1&type=movie&apikey=ae64b988";
 
 
 let xmlHttpreq = (url, cont, abc, xyz,scrl) => {
@@ -46,7 +50,7 @@ let xmlHttpreq = (url, cont, abc, xyz,scrl) => {
             if (data2.Search[i].Poster != "N/A") { // Title, Year,Poster
 
                 container[cont].innerHTML += `<div class="card ${scrl}" style="width: 12rem;">
-                <a href="movieDetailPage.html" class="${abc}"> <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px"></a>
+                <a href="movieDetailPage.html" class="${abc}"> <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px" title="${mainObj[i].Title}"></a>
                                 <div class="card-body">
                                     <h6 >Movie:- <span id="span1">${mainObj[i].Title}</span></h6>
                                     <h6 >Year:- <span id="span2">${mainObj[i].Year}</span></h6>
@@ -122,6 +126,9 @@ let xmlHttpreq = (url, cont, abc, xyz,scrl) => {
 xmlHttpreq(url2, 0, "i", "I");
 xmlHttpreq(url3, 1, "ii", "II","scroll");
 xmlHttpreq(url4, 2, "iii", "III");
+xmlHttpreq(url5, 3, "iv", "IV","scroll");
+xmlHttpreq(url6, 4, "v", "V","scroll");
+xmlHttpreq(url7, 5, "vi", "VI","scroll");
 
 
 let searchF = () => {

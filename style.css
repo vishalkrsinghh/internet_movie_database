@@ -21,7 +21,7 @@
         .undefined{
             min-height: 300px;
         }
-        .II {
+        .II,.IV,.V,.VI {
             position: absolute;
             bottom: 15px;
             width: 84%;
