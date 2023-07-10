@@ -1,5 +1,5 @@
 
-        button {
+        #favrte {
             position: absolute;
             right: 0px;
             z-index: 15;
@@ -30,6 +30,21 @@
             position: absolute;
             bottom: 5px;
             width: 84%;
+        }
+        .lrbtn{
+            position: relative;
+        }
+        #left,#right{
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 10%;
+        }
+        .tj{
+            height: fit-content!important;
+        }
+        #right{
+            right: 0;
         }
         .main {
             display: flex;
@@ -95,3 +110,5 @@
         .delete {
             width: 100% !important;
         }
+
+        /* media Query likhni hai crousel ki images k liye bade 425 se bade px k liye. */

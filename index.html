@@ -12,7 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
-        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+        
+        <script src="https://kit.fontawesome.com/a85cd81b06.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -34,8 +36,11 @@
     <div id="div2"> </div>
 
     <main id="main2">
-        <h4>Top Rated Movies</h4>
-        <div class="container d-flex flex-wrap gap-5 justify-content-center my-4"></div>
+        <div class="lrbtn">
+            <div class="container d-flex flex-wrap gap-5 justify-content-center my-4 tj"></div>
+            <button id="left"><i class="fa-solid fa-chevron-left"></i></button>
+            <button id="right" onclick="next()"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
         <h4>Avengers Movies</h4>
         <div class="container conta"></div>
         <h4>Popular Tv Shows</h4>
@@ -44,6 +49,8 @@
         <div class="container conta"></div>
         <div class="container conta"></div>
         <div class="container conta"></div>
+        <h4>Top Rated Movies</h4>
+        <div class="container d-flex flex-wrap gap-5 justify-content-center my-4"></div>
     </main>
 
 

@@ -30,11 +30,11 @@ let url3 = "https://www.omdbapi.com/?s=avenger&page=1&type=movie&apikey=ae64b988
 let url4 = "https://www.omdbapi.com/?s=hulk&page=1&type=movie&apikey=ae64b988";
 let url5 = "https://www.omdbapi.com/?s=shinchan&page=1&type=movie&apikey=ae64b988";
 let url6 = "https://www.omdbapi.com/?s=doraemon&page=1&type=movie&apikey=ae64b988";
-// https://www.omdbapi.com/?s=tom%20and%20jerry&page=1&type=movie&apikey=ae64b988
 let url7 = "https://www.omdbapi.com/?s=ice%20age&page=1&type=movie&apikey=ae64b988";
+let url8 = "https://www.omdbapi.com/?s=tom%20and%20jerry&page=1&type=movie&apikey=ae64b988";
+let arry=[];
 
-
-let xmlHttpreq = (url, cont, abc, xyz,scrl) => {
+let xmlHttpreq = (url, cont, abc, xyz,scrl,not) => {
 
     let xhr = new XMLHttpRequest();
     xhr.open("get", url, true);
@@ -47,16 +47,63 @@ let xmlHttpreq = (url, cont, abc, xyz,scrl) => {
         // console.log(data2.Search[0].Poster); 
         // console.log(data2.Search); 
         for (let i = 0; i < mainObj.length; i++) {
-            if (data2.Search[i].Poster != "N/A") { // Title, Year,Poster
 
-                container[cont].innerHTML += `<div class="card ${scrl}" style="width: 12rem;">
-                <a href="movieDetailPage.html" class="${abc}"> <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px" title="${mainObj[i].Title}"></a>
+            if(not){
+                arry.push(`<div class="card ${scrl}" style="width: 12rem;">
+                  <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px" title="${mainObj[i].Title}">
                                 <div class="card-body">
                                     <h6 >Movie:- <span id="span1">${mainObj[i].Title}</span></h6>
                                     <h6 >Year:- <span id="span2">${mainObj[i].Year}</span></h6>
-                                    <a href="#" class="btn btn-primary ${xyz}" id="hover">Add To Favoutite</a>
                                 </div>
-                        </div>`
+                        </div>`);
+                        // console.log(arry);
+                        container[cont].innerHTML = `${arry[0]}`
+
+                        let j = 1
+                        setInterval(() => {
+                            for (let i = j; i <= j; i++) {
+
+                                container[cont].innerHTML = `${arry[i]}`
+                            }
+                            j++;
+                            if (j == arry.length) {
+                                j = 0;
+                            }
+                        }, 5000)
+
+                        let k = 0;
+                        next = () => {
+                            k++;
+                            if (k > arry.length - 1) {
+                                k = 0;
+                            }
+                            container[cont].innerHTML = `${arry[k]}`
+                            // console.log(k+" next");
+                        }
+                        back = () => {
+                            k--;
+                            if (k < 0) {
+                                k = arry.length - 1;
+                            }
+                            container[cont].innerHTML = `${arry[k]}`
+                            // console.log(k +" back");
+                        }
+                        let left= document.getElementById("left");
+                        left.addEventListener("click", back);
+            }
+            else{
+
+                if (data2.Search[i].Poster != "N/A") { // Title, Year,Poster
+    
+                    container[cont].innerHTML += `<div class="card ${scrl}" style="width: 12rem;">
+                    <a href="movieDetailPage.html" class="${abc}"> <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px" title="${mainObj[i].Title}"></a>
+                                    <div class="card-body">
+                                        <h6 >Movie:- <span id="span1">${mainObj[i].Title}</span></h6>
+                                        <h6 >Year:- <span id="span2">${mainObj[i].Year}</span></h6>
+                                        <a href="#" class="btn btn-primary ${xyz}" id="hover">Add To Favoutite</a>
+                                    </div>
+                            </div>`
+                }
             }
         }
 
@@ -123,12 +170,13 @@ let xmlHttpreq = (url, cont, abc, xyz,scrl) => {
 
     }
 }
-xmlHttpreq(url2, 0, "i", "I");
+xmlHttpreq(url8, 0, null, null,null,"1");   // url8, 6, "vii", "VII",null,"1"
 xmlHttpreq(url3, 1, "ii", "II","scroll");
 xmlHttpreq(url4, 2, "iii", "III");
 xmlHttpreq(url5, 3, "iv", "IV","scroll");
 xmlHttpreq(url6, 4, "v", "V","scroll");
 xmlHttpreq(url7, 5, "vi", "VI","scroll");
+xmlHttpreq(url2, 6, "i", "I"); // url2, 0, "i", "I"
 
 
 let searchF = () => {
