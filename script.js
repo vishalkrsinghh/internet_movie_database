@@ -3,7 +3,7 @@
 let search = document.getElementById("search");
 let year = document.getElementById("year");
 let button = document.getElementById("button");
-let main2 =document.getElementById("main2")
+let main2 = document.getElementById("main2")
 let searchVal;
 let url;
 let yearVal = null;
@@ -30,7 +30,7 @@ let url3 = "https://www.omdbapi.com/?s=avenger&page=1&type=movie&apikey=ae64b988
 let url4 = "https://www.omdbapi.com/?s=hulk&page=1&type=movie&apikey=ae64b988";
 
 
-let xmlHttpreq = (url, cont,abc,xyz) => {
+let xmlHttpreq = (url, cont, abc, xyz,scrl) => {
 
     let xhr = new XMLHttpRequest();
     xhr.open("get", url, true);
@@ -45,12 +45,12 @@ let xmlHttpreq = (url, cont,abc,xyz) => {
         for (let i = 0; i < mainObj.length; i++) {
             if (data2.Search[i].Poster != "N/A") { // Title, Year,Poster
 
-                container[cont].innerHTML += `<div class="card" style="width: 12rem;">
+                container[cont].innerHTML += `<div class="card ${scrl}" style="width: 12rem;">
                 <a href="movieDetailPage.html" class="${abc}"> <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px"></a>
                                 <div class="card-body">
                                     <h6 >Movie:- <span id="span1">${mainObj[i].Title}</span></h6>
                                     <h6 >Year:- <span id="span2">${mainObj[i].Year}</span></h6>
-                                    <a href="#" class="btn btn-primary ${xyz}">Add To Favoutite</a>
+                                    <a href="#" class="btn btn-primary ${xyz}" id="hover">Add To Favoutite</a>
                                 </div>
                         </div>`
             }
@@ -59,11 +59,11 @@ let xmlHttpreq = (url, cont,abc,xyz) => {
         let mvp = document.getElementsByClassName(`${abc}`);
         for (let i = 0; i < mvp.length; i++) {
             // mvp[i].addEventListener("click", addinLocal);
-            mvp[i].onclick=function(){
+            mvp[i].onclick = function () {
                 // event.preventDefault();
                 moviePage.splice(0, 1, { "Poster": data2.Search[i].Poster, "Title": data2.Search[i].Title, "Type": data2.Search[i].Type, "Year": data2.Search[i].Year });
                 localStorage.setItem("arr2", JSON.stringify(moviePage));
-                console.log(i," ", " is click")
+                console.log(i, " ", " is click")
                 // console.log( Object.keys(moviePage[0]).length)
             }
         }
@@ -72,19 +72,19 @@ let xmlHttpreq = (url, cont,abc,xyz) => {
 
         let favbtn = document.getElementsByClassName(`${xyz}`);
 
-        for(let i=0; i<favbtn.length; i++){
-            favbtn[i].onclick= function(){
+        for (let i = 0; i < favbtn.length; i++) {
+            favbtn[i].onclick = function () {
                 event.preventDefault();
 
                 // addInLocStr.push({ "Poster": data.Poster, "Title": data.Title, "Language": data.Language, "Country": data.Country, "Duration": data.Runtime, "Plot":data.Plot });
                 addInLocStr.push(data2.Search[i]);
-    
+
                 addInLocStr = [...new Map(addInLocStr.map((m) => [m.Title, m])).values()];
-    
+
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
                 // localLength = addInLocStr.length;
                 // console.log(addInLocStr.length);
-                favbtn[i].style.background = "red";
+                favbtn[i].style.background = "green";
                 favbtn[i].innerHTML = `<span>Added</span> <lord-icon
                 src="https://cdn.lordicon.com/egiwmiit.json"
                 trigger="loop"
@@ -93,12 +93,11 @@ let xmlHttpreq = (url, cont,abc,xyz) => {
                 state="morph-check-in"
                 style="width:20px;height:20px">
                 </lord-icon>`;
-    
-                // favbtn.style.display = "flex"
-                favbtn[i].style.gap= "5%";
-                favbtn[i].style.alignItems="center";
-                // favbtn.style.justifyContent= "center";
-    
+
+                favbtn[i].removeAttribute("id");
+                favbtn[i].style.gap = "5%";
+                favbtn[i].style.alignItems = "center";
+
                 let k = 0;
                 let id = setInterval(() => {
                     // console.log("added");
@@ -110,21 +109,21 @@ let xmlHttpreq = (url, cont,abc,xyz) => {
                         document.getElementsByClassName("alert1")[0].style.display = "none";
                         clearInterval(id);
                     } else {
-    
+
                         document.getElementsByClassName("alert1")[0].style.display = "block";
                     }
                 }, 200)
-    
+
             }
         }
 
     }
 }
-xmlHttpreq(url2, 0,"i","I");
-xmlHttpreq(url3, 1,"ii","II");
-xmlHttpreq(url4, 2,"iii","III");
+xmlHttpreq(url2, 0, "i", "I");
+xmlHttpreq(url3, 1, "ii", "II","scroll");
+xmlHttpreq(url4, 2, "iii", "III");
 
-// let Q;
+
 let searchF = () => {
     searchVal = search.value;
     let xhr = new XMLHttpRequest();
@@ -150,10 +149,10 @@ let searchF = () => {
         }
         if (search.value == "") {
             div.style.display = "none";
-            main2.style.display="block"
+            main2.style.display = "block"
         } else {
             div.style.display = "block";
-            main2.style.display="none"
+            main2.style.display = "none"
         }
         // console.log(mainObj + " " + typeof mainObj);
         if (mainObj != undefined && mainObj != "N/A") {
@@ -206,8 +205,8 @@ let searchF = () => {
                 </lord-icon>`;
 
                 // favbtn.style.display = "flex"
-                favbtn.style.gap= "5%";
-                favbtn.style.alignItems="center";
+                favbtn.style.gap = "5%";
+                favbtn.style.alignItems = "center";
                 // favbtn.style.justifyContent= "center";
 
                 let k = 0;
@@ -244,29 +243,41 @@ let favShow = function () {
         // console.log("hieieie")
         for (let i = 0; i < addInLocStr.length; i++) {
             // console.log(addInLocStr)
-            if(Object.keys(addInLocStr[i]).length==5){
+            if (Object.keys(addInLocStr[i]).length == 5) {
                 div2.innerHTML += `<div class="card card2" style="width: 13rem; margin-top: 2rem; justify-content: center;">
                 <a href="movieDetailPage.html" class="mvpgg"> <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="${addInLocStr[i].Title}" width="120px" height="180px" title="${addInLocStr[i].Title}"></a>
                                    
                                         <p><strong>Movie:-</strong><span class="card-title">${addInLocStr[i].Title}</span></p>
                                         <p class="card-text"><strong>Type:-</strong> ${addInLocStr[i].Type}</p>
                                         <p class="card-text"><strong>Release Year:-</strong> ${addInLocStr[i].Year}</p>
-                                        <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete</a>
+                                        <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete <lord-icon
+                                        src="https://cdn.lordicon.com/kfzfxczd.json"
+                                        trigger="loop"
+                                        delay="2000"
+                                        colors="primary:white"
+                                        style="width:20px;height:20px">
+                                    </lord-icon></a>
                                     
                             </div>`
-            }else{
-            div2.innerHTML += `<div class="card card2" style="width: 13rem; margin-top: 2rem; justify-content: center;">
+            } else {
+                div2.innerHTML += `<div class="card card2" style="width: 13rem; margin-top: 2rem; justify-content: center;">
             <a href="movieDetailPage.html" class="mvpgg"> <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="${addInLocStr[i].Title}" width="120px" height="180px" title="${addInLocStr[i].Title}"></a>
                                
                                     <p><strong>Movie:-</strong><span class="card-title">${addInLocStr[i].Title}</span></p>
                                     <p class="card-text"><strong>Country:-</strong> ${addInLocStr[i].Country}</p>
                                     <p class="card-text"><strong>Duration:-</strong> ${addInLocStr[i].Runtime}</p>
-                                    <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete</a>
+                                    <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete <lord-icon
+                                    src="https://cdn.lordicon.com/kfzfxczd.json"
+                                    trigger="loop"
+                                    delay="2000"
+                                    colors="primary:white"
+                                    style="width:20px;height:20px">
+                                </lord-icon></a>
                                 
                         </div>`
             }
-                        // console.log(Object.keys(addInLocStr[i]).length);
-                        // console.log(Object.keys(addInLocStr[i]));
+            // console.log(Object.keys(addInLocStr[i]).length);
+            // console.log(Object.keys(addInLocStr[i]));
         }
     }
     else if (div2.style.display == "flex") {
@@ -282,10 +293,10 @@ let favShow = function () {
         mvpgg[i].onclick = function () {
             // event.preventDefault();
             // console.log(i, " ", " is click");
-            if(Object.keys(addInLocStr[i]).length==5){
+            if (Object.keys(addInLocStr[i]).length == 5) {
                 moviePage.splice(0, 1, { "Poster": addInLocStr[i].Poster, "Title": addInLocStr[i].Title, "Year": addInLocStr[i].Year, "Type": addInLocStr[i].Type });
-            localStorage.setItem("arr2", JSON.stringify(moviePage));
-            }else{
+                localStorage.setItem("arr2", JSON.stringify(moviePage));
+            } else {
                 moviePage.splice(0, 1, { "Poster": addInLocStr[i].Poster, "Title": addInLocStr[i].Title, "Language": addInLocStr[i].Language, "Country": addInLocStr[i].Country, "Duration": addInLocStr[0].Runtime, "Actors": addInLocStr[i].Actors, "Writer": addInLocStr[i].Writer, "Director": addInLocStr[i].Director, "Awards": addInLocStr[i].Awards, "Released": addInLocStr[i].Released, "Plot": addInLocStr[i].Plot });
                 localStorage.setItem("arr2", JSON.stringify(moviePage));
             }
@@ -309,7 +320,7 @@ let favShow = function () {
             main[i].style.display = "none"
         }
         div2.style.display = "flex";
-        main2.style.display="none"
+        main2.style.display = "none"
     } else {
         favrte.innerText = `Favourite`
         favrte.style.background = ""
@@ -320,11 +331,11 @@ let favShow = function () {
         for (let i = 0; i < main.length; i++) {
             main[i].style.display = "flex"
         }
-        main2.style.display="block"
+        main2.style.display = "block"
     }
     if (search.value != "") {
-        main2.style.display="none"
-    } 
+        main2.style.display = "none"
+    }
 
     let deletee = document.getElementsByClassName("delete");
     let del = function (event) {

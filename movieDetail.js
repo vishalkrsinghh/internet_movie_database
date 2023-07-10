@@ -6,8 +6,7 @@ let getLocalDetail = JSON.parse(localStorage.arr2);
 let cont = document.getElementsByClassName("container")[0];
 // console.log(Object.keys(getLocalDetail[0]).length);
 if(Object.keys(getLocalDetail[0]).length==4 || Object.keys(getLocalDetail[0]).length==5){
-  cont.innerHTML = ` 
-       <div class="card mb-3" style="max-width: 540px;">
+  cont.innerHTML = `<div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0" style="align-items: center;">
       <div class="col-md-4">
         <img src="${getLocalDetail[0].Poster}" class="img-fluid rounded-start imgf" alt="..." height="100%">
@@ -24,8 +23,7 @@ if(Object.keys(getLocalDetail[0]).length==4 || Object.keys(getLocalDetail[0]).le
 }
 else{
 
-  cont.innerHTML = ` 
-         <div class="card mb-3" style="max-width: 540px;">
+  cont.innerHTML = `<div class="card mb-3" style="max-width: 540px;">
       <div class="row g-0" style="align-items: center;">
         <div class="col-md-4">
           <img src="${getLocalDetail[0].Poster}" class="img-fluid rounded-start imgf" alt="..." height="100%">

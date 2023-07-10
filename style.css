@@ -9,8 +9,28 @@
         #search {
             margin-top: 60px;
         }
-
-        /* write media Query for .main */
+        .conta{
+            display: flex;
+            align-items: center;
+        }
+        .scroll{
+            min-width: 200px;
+            margin: 5px 10px;
+            min-height: 340px;
+        }
+        .undefined{
+            min-height: 300px;
+        }
+        .II {
+            position: absolute;
+            bottom: 15px;
+            width: 84%;
+        }
+        .I,.III{
+            position: absolute;
+            bottom: 5px;
+            width: 84%;
+        }
         .main {
             display: flex;
             flex-direction: column;
@@ -23,8 +43,16 @@
         a.btn.btn-primary {
             display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 3%;
+            transition: all 0.8s;
         }
-
+        a.btn.btn-primary:hover{
+            background-color: brown;
+        }
+        #hover:hover{
+            background-color: rgb(95, 235, 95);
+        }
         .alert1 {
             display: none;
         }
