@@ -5,7 +5,9 @@
     z-index: 15;
     margin-top: 60px;
 }
-
+body{
+    background-color: cadetblue;
+}
 #search {
     margin-top: 60px;
 }
@@ -51,6 +53,8 @@
     top: 0;
     height: 100%;
     width: 10%;
+    background: transparent;
+    border: none;
 }
 
 .tj {
@@ -87,6 +91,7 @@ a.btn.btn-primary {
     align-items: center;
     gap: 3%;
     transition: all 0.8s;
+    background: black;
 }
 
 a.btn.btn-primary:hover {
@@ -95,6 +100,9 @@ a.btn.btn-primary:hover {
 
 #hover:hover {
     background-color: rgb(95, 235, 95);
+}
+.card:hover {
+    box-shadow: 1px 2px 5px black;
 }
 
 .alert1,
@@ -115,8 +123,7 @@ a.btn.btn-primary:hover {
 }
 
 .container::-webkit-scrollbar {
-    scroll-snap-type: none;
-    scrollbar-face-color: aqua;
+  display: none;
 }
 
 #div2 {
@@ -142,12 +149,9 @@ p {
 
 @media only screen and (max-width:425px) {
 
-    body {
-        background-color: aquamarine;
-    }
-
     .null {
         width: 13rem !important;
+        box-shadow: 0px 35px 15px 1px black;
     }
 
     .tomj {
@@ -156,12 +160,9 @@ p {
 }
 
 @media only screen and (min-width:585px) and (max-width:768px) {
-    body {
-        background-color: brown;
-    }
-
     .null {
         width: 25rem !important;
+        box-shadow: 0px 35px 15px 1px black;
     }
 
     .tomj {
@@ -174,12 +175,9 @@ p {
 }
 
 @media only screen and (min-width:768px) {
-    body {
-        background-color: chartreuse;
-    }
-
     .null {
         width: 35rem !important;
+        box-shadow: 0px 35px 15px 1px black;
     }
 
     .tomj {

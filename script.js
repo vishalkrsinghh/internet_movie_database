@@ -1,4 +1,3 @@
-// https://www.omdbapi.com/?s=batman&y=2011&page=1&type=movie&apikey=ae64b988
 
 let search = document.getElementById("search");
 let year = document.getElementById("year");
@@ -20,7 +19,6 @@ if (localStorage.getItem("arr2") == null) {
 
     localStorage.setItem("arr2", "[0]");
 }
-// let localLength = JSON.parse(localStorage.getItem("arr")).length;
 let div = document.getElementById("div");
 let div2 = document.getElementById("div2");
 let container = document.getElementsByClassName("container");
@@ -56,7 +54,6 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
                                     <h6 >Year:- <span id="span2">${mainObj[i].Year}</span></h6>
                                 </div>
                         </div>`);
-                // console.log(arry);
                 container[cont].innerHTML = `${arry[0]}`
 
                 let j = 1
@@ -93,7 +90,7 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
             }
             else {
 
-                if (data2.Search[i].Poster != "N/A") { // Title, Year,Poster
+                if (data2.Search[i].Poster != "N/A") { 
 
                     container[cont].innerHTML += `<div class="card ${scrl}" style="width: 12rem;">
                     <a href="movieDetailPage.html" class="${abc}"> <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px" title="${mainObj[i].Title}"></a>
@@ -109,16 +106,13 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
 
         let mvp = document.getElementsByClassName(`${abc}`);
         for (let i = 0; i < mvp.length; i++) {
-            // mvp[i].addEventListener("click", addinLocal);
             mvp[i].onclick = function () {
                 // event.preventDefault();
                 moviePage.splice(0, 1, { "Poster": data2.Search[i].Poster, "Title": data2.Search[i].Title, "Type": data2.Search[i].Type, "Year": data2.Search[i].Year });
                 localStorage.setItem("arr2", JSON.stringify(moviePage));
                 // console.log(i, " ", " is click")
-                // console.log( Object.keys(moviePage[0]).length)
             }
         }
-        // console.log(mvp.length)
 
 
         let favbtn = document.getElementsByClassName(`${xyz}`);
@@ -127,14 +121,11 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
             favbtn[i].onclick = function () {
                 event.preventDefault();
 
-                // addInLocStr.push({ "Poster": data.Poster, "Title": data.Title, "Language": data.Language, "Country": data.Country, "Duration": data.Runtime, "Plot":data.Plot });
                 addInLocStr.push(data2.Search[i]);
 
                 addInLocStr = [...new Map(addInLocStr.map((m) => [m.Title, m])).values()];
 
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
-                // localLength = addInLocStr.length;
-                // console.log(addInLocStr.length);
                 favbtn[i].style.background = "green";
                 favbtn[i].innerHTML = `<span>Added</span> <lord-icon
                 src="https://cdn.lordicon.com/egiwmiit.json"
@@ -151,7 +142,6 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
 
                 let k = 0;
                 let id = setInterval(() => {
-                    // console.log("added");
                     idd1 = id;
                     document.getElementsByClassName("alert2")[0].style.display = "none";
                     clearInterval(idd2);
@@ -184,7 +174,6 @@ let searchF = () => {
     let xhr = new XMLHttpRequest();
     url = `https://www.omdbapi.com/?t=${searchVal}&plot=full&apikey=ae64b988`;
 
-    // console.log(searchVal)
     xhr.open("get", url, true);
     xhr.send();
     xhr.onload = function () {
@@ -195,10 +184,8 @@ let searchF = () => {
         // console.log(typeof data);
         if (data.Response == "False" || mainObj == "N/A") {
             if (mainObj == "N/A" && data.Response != "False") {
-                // console.log("movie found but didnt get poster/thumbnail")
                 div.innerHTML = `<b> Movie found but didn't get poster/thumbnail(image) or more about the movie.</b>`;
             } else {
-                // console.log("haa")
                 div.innerHTML = `<h2>${data.Error}</h2>`;
             }
         }
@@ -213,7 +200,6 @@ let searchF = () => {
         }
         // console.log(mainObj + " " + typeof mainObj);
         if (mainObj != undefined && mainObj != "N/A") {
-            // console.log(searchVal);
 
             div.innerHTML = `<div class="card card1" style="width: 18rem;">
                        <a href="movieDetailPage.html" class="mvpg"> <img src="${mainObj}" title="${data.Title}" class="card-img-top" alt="${data.Title}" width="230px" height="300px"> </a>
@@ -229,7 +215,6 @@ let searchF = () => {
             // console.log(data);
             let addinLocal = function () {
                 // event.preventDefault();
-                // console.log(data);
 
                 moviePage.splice(0, 1, { "Poster": data.Poster, "Title": data.Title, "Language": data.Language, "Country": data.Country, "Duration": data.Runtime, "Actors": data.Actors, "Writer": data.Writer, "Director": data.Director, "Awards": data.Awards, "Released": data.Released, "Plot": data.Plot });
                 localStorage.setItem("arr2", JSON.stringify(moviePage));
@@ -249,7 +234,6 @@ let searchF = () => {
                 addInLocStr = [...new Map(addInLocStr.map((m) => [m.Title, m])).values()];
 
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
-                // localLength = addInLocStr.length;
                 // console.log(addInLocStr.length);
                 favbtn.style.background = "red";
                 favbtn.innerHTML = `<span>Added</span> <lord-icon
@@ -261,14 +245,11 @@ let searchF = () => {
                 style="width:20px;height:20px">
                 </lord-icon>`;
 
-                // favbtn.style.display = "flex"
                 favbtn.style.gap = "5%";
                 favbtn.style.alignItems = "center";
-                // favbtn.style.justifyContent= "center";
 
                 let k = 0;
                 let id = setInterval(() => {
-                    // console.log("added");
                     idd1 = id;
                     document.getElementsByClassName("alert2")[0].style.display = "none";
                     clearInterval(idd2);
@@ -292,13 +273,9 @@ let searchF = () => {
 let main = document.getElementsByClassName("main")
 let y = 0;
 let favShow = function () {
-    // console.log(addInLocStr.length);
-    // console.log(addInLocStr[0]);
     y++;
     if (addInLocStr.length > 0 && y == 1) {
-        // console.log("hieieie")
         for (let i = 0; i < addInLocStr.length; i++) {
-            // console.log(addInLocStr)
             if (Object.keys(addInLocStr[i]).length == 5) {
                 div2.innerHTML += `<div class="card card2" style="width: 13rem; margin-top: 2rem; justify-content: center;">
                 <a href="movieDetailPage.html" class="mvpgg"> <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="${addInLocStr[i].Title}" width="120px" height="180px" title="${addInLocStr[i].Title}"></a>
@@ -337,7 +314,6 @@ let favShow = function () {
         }
     }
     else if (div2.style.display == "flex") {
-        // console.log("wewewe")
         div2.innerHTML = "";
         div2.style.display = "none";
         y = 0;
@@ -404,12 +380,9 @@ let favShow = function () {
         for (let j = 0; j < deletee.length; j++) {
             deletee[j].onclick = function () {
                 addInLocStr.splice(j, 1);
-                // localLength--;
-                // console.log(localLength);
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
                 // window.location.reload();
                 this.parentNode.remove();
-                // j=0;
 
                 let m = 0;
                 let id2 = setInterval(() => {
