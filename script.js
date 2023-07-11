@@ -32,9 +32,9 @@ let url5 = "https://www.omdbapi.com/?s=shinchan&page=1&type=movie&apikey=ae64b98
 let url6 = "https://www.omdbapi.com/?s=doraemon&page=1&type=movie&apikey=ae64b988";
 let url7 = "https://www.omdbapi.com/?s=ice%20age&page=1&type=movie&apikey=ae64b988";
 let url8 = "https://www.omdbapi.com/?s=tom%20and%20jerry&page=1&type=movie&apikey=ae64b988";
-let arry=[];
+let arry = [];
 
-let xmlHttpreq = (url, cont, abc, xyz,scrl,not) => {
+let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
 
     let xhr = new XMLHttpRequest();
     xhr.open("get", url, true);
@@ -48,53 +48,53 @@ let xmlHttpreq = (url, cont, abc, xyz,scrl,not) => {
         // console.log(data2.Search); 
         for (let i = 0; i < mainObj.length; i++) {
 
-            if(not){
-                arry.push(`<div class="card ${scrl}" style="width: 12rem;">
-                  <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px" title="${mainObj[i].Title}">
+            if (not) {
+                arry.push(`<div class="card ${scrl}" >
+                                  <img src="${mainObj[i].Poster}" class="card-img-top tomj" alt="..." width="150px" height="150px" title="${mainObj[i].Title}">
                                 <div class="card-body">
                                     <h6 >Movie:- <span id="span1">${mainObj[i].Title}</span></h6>
                                     <h6 >Year:- <span id="span2">${mainObj[i].Year}</span></h6>
                                 </div>
                         </div>`);
-                        // console.log(arry);
-                        container[cont].innerHTML = `${arry[0]}`
+                // console.log(arry);
+                container[cont].innerHTML = `${arry[0]}`
 
-                        let j = 1
-                        setInterval(() => {
-                            for (let i = j; i <= j; i++) {
+                let j = 1
+                setInterval(() => {
+                    for (let i = j; i <= j; i++) {
 
-                                container[cont].innerHTML = `${arry[i]}`
-                            }
-                            j++;
-                            if (j == arry.length) {
-                                j = 0;
-                            }
-                        }, 5000)
+                        container[cont].innerHTML = `${arry[i]}`
+                    }
+                    j++;
+                    if (j == arry.length) {
+                        j = 0;
+                    }
+                }, 5000)
 
-                        let k = 0;
-                        next = () => {
-                            k++;
-                            if (k > arry.length - 1) {
-                                k = 0;
-                            }
-                            container[cont].innerHTML = `${arry[k]}`
-                            // console.log(k+" next");
-                        }
-                        back = () => {
-                            k--;
-                            if (k < 0) {
-                                k = arry.length - 1;
-                            }
-                            container[cont].innerHTML = `${arry[k]}`
-                            // console.log(k +" back");
-                        }
-                        let left= document.getElementById("left");
-                        left.addEventListener("click", back);
+                let k = 0;
+                next = () => {
+                    k++;
+                    if (k > arry.length - 1) {
+                        k = 0;
+                    }
+                    container[cont].innerHTML = `${arry[k]}`
+                    // console.log(k+" next");
+                }
+                back = () => {
+                    k--;
+                    if (k < 0) {
+                        k = arry.length - 1;
+                    }
+                    container[cont].innerHTML = `${arry[k]}`
+                    // console.log(k +" back");
+                }
+                let left = document.getElementById("left");
+                left.addEventListener("click", back);
             }
-            else{
+            else {
 
                 if (data2.Search[i].Poster != "N/A") { // Title, Year,Poster
-    
+
                     container[cont].innerHTML += `<div class="card ${scrl}" style="width: 12rem;">
                     <a href="movieDetailPage.html" class="${abc}"> <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px" title="${mainObj[i].Title}"></a>
                                     <div class="card-body">
@@ -114,7 +114,7 @@ let xmlHttpreq = (url, cont, abc, xyz,scrl,not) => {
                 // event.preventDefault();
                 moviePage.splice(0, 1, { "Poster": data2.Search[i].Poster, "Title": data2.Search[i].Title, "Type": data2.Search[i].Type, "Year": data2.Search[i].Year });
                 localStorage.setItem("arr2", JSON.stringify(moviePage));
-                console.log(i, " ", " is click")
+                // console.log(i, " ", " is click")
                 // console.log( Object.keys(moviePage[0]).length)
             }
         }
@@ -170,15 +170,15 @@ let xmlHttpreq = (url, cont, abc, xyz,scrl,not) => {
 
     }
 }
-xmlHttpreq(url8, 0, null, null,null,"1");   // url8, 6, "vii", "VII",null,"1"
-xmlHttpreq(url3, 1, "ii", "II","scroll");
+xmlHttpreq(url8, 0, null, null, null, "1");
+xmlHttpreq(url3, 1, "ii", "II", "scroll");
 xmlHttpreq(url4, 2, "iii", "III");
-xmlHttpreq(url5, 3, "iv", "IV","scroll");
-xmlHttpreq(url6, 4, "v", "V","scroll");
-xmlHttpreq(url7, 5, "vi", "VI","scroll");
-xmlHttpreq(url2, 6, "i", "I"); // url2, 0, "i", "I"
+xmlHttpreq(url5, 3, "iv", "IV", "scroll");
+xmlHttpreq(url6, 4, "v", "V", "scroll");
+xmlHttpreq(url7, 5, "vi", "VI", "scroll");
+xmlHttpreq(url2, 6, "i", "I");
 
-
+let favrte = document.getElementById("favrte");
 let searchF = () => {
     searchVal = search.value;
     let xhr = new XMLHttpRequest();
@@ -205,9 +205,11 @@ let searchF = () => {
         if (search.value == "") {
             div.style.display = "none";
             main2.style.display = "block"
+            favrte.style.position = "fixed"
         } else {
             div.style.display = "block";
             main2.style.display = "none"
+            favrte.style.position = "absolute";
         }
         // console.log(mainObj + " " + typeof mainObj);
         if (mainObj != undefined && mainObj != "N/A") {
@@ -218,7 +220,7 @@ let searchF = () => {
                             <div class="card-body">
                                 <h5 >Movie:- ${data.Title}</h5>
                                 <h6 >Language:- ${data.Language}</h6>
-                                <p class="card-text"> ${data.Plot.slice(0, 100)}  <a href="movieDetailPage.html" class="mvpg" style="text-decoration:none;">Read more....</a></p>
+                                <p class="card-text"> ${data.Plot.slice(0, 100)} <a href="movieDetailPage.html" class="mvpg" style="text-decoration:none;">Read more....</a></p>
                                 <a href="#" class="btn btn-primary">Add To Favoutite</a>
                             </div>
                     </div>`
@@ -288,7 +290,6 @@ let searchF = () => {
 }
 
 let main = document.getElementsByClassName("main")
-let favrte = document.getElementById("favrte");
 let y = 0;
 let favShow = function () {
     // console.log(addInLocStr.length);
@@ -368,6 +369,7 @@ let favShow = function () {
         </lord-icon>`;
         favrte.style.background = "transparent"
         favrte.style.border = "none"
+
         favrte.style.position = "fixed"
         favrte.style.top = "60"
         favrte.style.right = "-13px"
@@ -380,7 +382,11 @@ let favShow = function () {
         favrte.innerText = `Favourite`
         favrte.style.background = ""
         favrte.style.border = ""
-        favrte.style.position = "absolute"
+        if (search.value != "") {
+            favrte.style.position = "absolute";
+        } else {
+            favrte.style.position = "fixed"
+        }
         favrte.style.top = "60"
         favrte.style.right = "0px"
         for (let i = 0; i < main.length; i++) {
