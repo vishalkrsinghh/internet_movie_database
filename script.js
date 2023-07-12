@@ -45,7 +45,6 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
         // console.log(data2.Search[0].Poster); 
         // console.log(data2.Search); 
         for (let i = 0; i < mainObj.length; i++) {
-
             if (not) {
                 arry.push(`<div class="card ${scrl}" >
                                   <img src="${mainObj[i].Poster}" class="card-img-top tomj" alt="..." width="150px" height="150px" title="${mainObj[i].Title}">
@@ -56,42 +55,38 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
                         </div>`);
                 container[cont].innerHTML = `${arry[0]}`
 
-                let j = 1
-                setInterval(() => {
-                    for (let i = j; i <= j; i++) {
-
-                        container[cont].innerHTML = `${arry[i]}`
+                let j = 0;
+                // let k = 0;
+                next = () => {
+                    j++;
+                    if (j > arry.length - 1) {
+                        j = 0;
                     }
+                    container[cont].innerHTML = `${arry[j]}`
+                    // console.log(k+" next");
+                }
+                back = () => {
+                    j--;
+                    if (j < 0) {
+                        j = arry.length - 1;
+                    }
+                    container[cont].innerHTML = `${arry[j]}`
+                    // console.log(k +" back");
+                }
+                setInterval(() => {
                     j++;
                     if (j == arry.length) {
                         j = 0;
                     }
+                    container[cont].innerHTML = `${arry[j]}`
                 }, 5000)
 
-                let k = 0;
-                next = () => {
-                    k++;
-                    if (k > arry.length - 1) {
-                        k = 0;
-                    }
-                    container[cont].innerHTML = `${arry[k]}`
-                    // console.log(k+" next");
-                }
-                back = () => {
-                    k--;
-                    if (k < 0) {
-                        k = arry.length - 1;
-                    }
-                    container[cont].innerHTML = `${arry[k]}`
-                    // console.log(k +" back");
-                }
                 let left = document.getElementById("left");
                 left.addEventListener("click", back);
             }
             else {
 
-                if (data2.Search[i].Poster != "N/A") { 
-
+                if (data2.Search[i].Poster != "N/A") {
                     container[cont].innerHTML += `<div class="card ${scrl}" style="width: 12rem;">
                     <a href="movieDetailPage.html" class="${abc}"> <img src="${mainObj[i].Poster}" class="card-img-top" alt="..." width="150px" height="150px" title="${mainObj[i].Title}"></a>
                                     <div class="card-body">
