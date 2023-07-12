@@ -109,7 +109,6 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
             }
         }
 
-
         let favbtn = document.getElementsByClassName(`${xyz}`);
 
         for (let i = 0; i < favbtn.length; i++) {

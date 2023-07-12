@@ -13,9 +13,12 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 
+    <link rel="shortcut icon" href="fabico.JPG" type="image/x-icon">
+
     <style>
         h3 {
             text-align: center;
+            margin-top: 25px;
         }
 
         .container {
@@ -33,11 +36,43 @@
         .imgf {
             border-radius: 0.375rem;
         }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            position: sticky;
+            max-height: 105px;
+            min-height: 105px;
+            top: 0px;
+            z-index: 14;
+            box-shadow: 0px 1px 10px 1px black;
+        }
+
+        .fltleft {
+            width: 145px;
+            position: absolute;
+            top: 20px;
+            left: -40px;
+        }
+
+        .cntr {
+            position: absolute;
+            top: 8px;
+            width: 200px;
+            z-index: -1;
+        }
     </style>
     <script src="movieDetail.js" async></script>
 </head>
 
 <body>
+
+    <div class="main">
+        <img src="logo_fyfm.svg" alt="" class="fltleft">
+        <img src="fyfm_txt.svg" alt="" class="cntr">
+    </div>
 
     <h3>Movie Detail</h3>
 
