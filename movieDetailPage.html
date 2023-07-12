@@ -12,6 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
+        
+    <script src="https://kit.fontawesome.com/a85cd81b06.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 
     <link rel="shortcut icon" href="fabico.JPG" type="image/x-icon">
 
@@ -63,6 +66,84 @@
             width: 200px;
             z-index: -1;
         }
+
+        /* footer css start  */
+
+        footer {
+
+            background-color: #202020;
+            display: flex;
+            justify-content: space-around;
+            font-family: 'Ubuntu', sans-serif;
+            width: 100%;
+            font-size: 1.2em;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .foot {
+            display: flex;
+            flex-direction: column;
+            margin: 5px auto;
+            justify-content: flex-start;
+            color: #ffffff;
+        }
+
+        @media (max-width:768px) {
+
+            footer {
+                background-color: #ffffff;
+                background-attachment: fixed;
+                display: flex;
+                justify-content: space-around;
+
+            }
+
+            .foot {
+                font-size: .6rem;
+                color: black;
+            }
+
+            a {
+                text-decoration: none;
+                color: black;
+            }
+        }
+
+        .em {
+
+            background: transparent;
+            border: none;
+        }
+
+        span.social {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 15px;
+            align-items: center;
+            margin-left: -8px;
+        }
+
+        .xyz {
+
+            margin-top: 15px;
+        }
+
+        .h22 {
+            margin-top: 0px;
+            text-decoration: underline;
+        }
+
+        .fa-instagram {
+            padding-right: 2px;
+            padding-top: 1px;
+        }
+
+
+        /* footer css end */
     </style>
     <script src="movieDetail.js" async></script>
 </head>
@@ -79,6 +160,85 @@
     <div class="container">
 
     </div>
+
+    <hr style="border: 1px solid black; margin-top:50px;">
+
+    <footer>
+
+        <div class="foot">
+
+            <h2 class="h22"> Vishal Kr. Singh </h2>
+
+            <span class="xyz">
+
+                <a href="mailto:vk788043@gmail.com">
+
+                    <lord-icon class="em" src="https://cdn.lordicon.com/tkgyrmwc.json" trigger="loop-on-hover"
+                        delay="2000">
+                    </lord-icon>
+
+                    vk788043@gmail
+                </a>
+            </span>
+
+            <span class="xyz">
+
+                <a href="tel:8510036236">
+
+                    <lord-icon class="em" src="https://cdn.lordicon.com/cnyeuzxc.json" trigger="loop-on-hover"
+                        state="hover-phone-ring" style=" height:22px; "> </lord-icon>
+
+
+                    85100 36236
+                </a>
+            </span>
+
+            <span class="social">
+
+                <lord-icon class="em" src="https://cdn.lordicon.com/iifryyua.json" trigger="loop-on-hover"
+                    style="width:22px; margin-left: -4px; "> </lord-icon>
+
+                <a href=" www.facebook.com"> <i class="fa-brands fa-facebook" style=" color:blue;"></i>
+                </a>
+                <a href="www.instagram.com"><i class="fa-brands fa-instagram"
+                        style=" color: white; background: linear-gradient( 50deg,orange,red,violet );border-radius: 5px; padding-left: 2px;"></i></a>
+                <a href="www.twitter.com "> <i class="fa-brands fa-twitter" style="color: blue;"></i> </a>
+                <a href="www.youtube.com"> <i class="fa-brands fa-youtube" style="color: red;"></i> </a>
+            </span>
+        </div>
+
+        <div class="foot">
+
+            <caption> <strong class="h22"> About</strong> </caption>
+
+            <span class="xyz"> <a href=""> Contact us </a> </span>
+
+            <span class="xyz"> <a href="">About us</a></span>
+
+            <span class="xyz"> <a href=" "> Our team </a> </span>
+
+            <span class="xyz"> <a href=""> Terms of services </a></span>
+
+        </div>
+
+        <div class="foot">
+
+            <caption> <strong class="h22"> Product</strong> </caption>
+            <span class="xyz"> <a href=""> Terms of uses </a></span>
+            <span class="xyz"> <a href=""> Privacy Policy </a></span>
+            <span class="xyz"> <a href=""> Login </a></span>
+        </div>
+
+        <div class="foot">
+
+            <caption> <strong class="h22"> Download app </strong> </caption>
+            <span class="xyz"> <a href=""> Google play </a> </span>
+
+            <span class="xyz"> <a href=""> Apple store</a></span>
+            <span class="xyz"> <a href=""> Microsoft store </a></span>
+        </div>
+
+    </footer>
 
 </body>
 

@@ -4,15 +4,18 @@
     top: 0px;
     z-index: 15;
     margin-top: 60px;
-    filter: drop-shadow(2px 4px 6px black); /* fliter:drop-shadow is alternat of box shadow in which only image's main content will get shadow  */
+    filter: drop-shadow(2px 4px 6px black);
+    /* fliter:drop-shadow is alternat of box shadow in which only image's main content will get shadow  */
 }
-.fltleft{
+
+.fltleft {
     width: 145px;
     position: absolute;
     top: 0px;
     left: -40px;
     /* mix-blend-mode: color-burn; for doing background color of page and image background color same. */
 }
+
 .cntr {
     position: absolute;
     top: -17px;
@@ -21,9 +24,11 @@
     /* mix-blend-mode: color-burn; */
     z-index: -1;
 }
-body{
+
+body {
     background-color: cadetblue;
 }
+
 #search {
     margin-top: 60px;
     text-align: center;
@@ -79,7 +84,8 @@ body{
     height: fit-content !important;
     box-shadow: 1px 2px 35px inset black;
 }
-.inset{
+
+.inset {
     box-shadow: 1px 2px 35px inset black;
 }
 
@@ -124,6 +130,7 @@ a.btn.btn-primary:hover {
 #hover:hover {
     background-color: rgb(95, 235, 95);
 }
+
 .card:hover {
     box-shadow: 1px 2px 5px black;
 }
@@ -147,7 +154,7 @@ a.btn.btn-primary:hover {
 }
 
 .container::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 #div2 {
@@ -212,3 +219,78 @@ p {
         width: 20rem;
     }
 }
+
+/* footer css start  */
+
+footer {
+
+    background-color: #202020;
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Ubuntu', sans-serif;
+    width: 100%;
+    font-size: 1.2em;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+.foot {
+    display: flex;
+    flex-direction: column;
+    margin: 5px auto;
+    justify-content: flex-start;
+    color: #ffffff;
+}
+
+@media (max-width:768px) {
+
+    footer {
+        background-color: #ffffff;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .foot {
+        font-size: .6rem;
+        color: black;
+    }
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}
+
+.em {
+
+    background: transparent;
+    border: none;
+}
+
+span.social {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+    align-items: center;
+    margin-left: -8px;
+}
+
+.xyz {
+
+    margin-top: 15px;
+}
+
+.h22 {
+    margin-top: 0px;
+    text-decoration: underline;
+}
+
+.fa-instagram {
+    padding-right: 2px;
+    padding-top: 1px;
+}
+
+
+/* footer css end */
