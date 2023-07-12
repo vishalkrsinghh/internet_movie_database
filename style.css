@@ -153,7 +153,7 @@ a.btn.btn-primary:hover {
     /* filter: drop-shadow(2px 4px 6px black); */
 }
 
-.container::-webkit-scrollbar {
+.container::-webkit-scrollbar,#div2::-webkit-scrollbar {
     display: none;
 }
 
@@ -163,6 +163,10 @@ a.btn.btn-primary:hover {
     flex-wrap: wrap;
     gap: 7%;
     justify-content: center;
+    position: absolute;
+    z-index: 5;
+    max-height: 3000px;
+    overflow: scroll;
 }
 
 #div {

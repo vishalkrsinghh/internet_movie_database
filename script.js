@@ -185,12 +185,17 @@ let searchF = () => {
         }
         if (search.value == "") {
             div.style.display = "none";
-            main2.style.display = "block"
+            // main2.style.display = "block"
+            main2.style.filter="blur(0px)";
+            main2.style.pointerEvents="";
             favrte.style.position = "fixed"
         } else {
             div.style.display = "block";
-            main2.style.display = "none"
-            favrte.style.position = "absolute";
+            // main2.style.display = "none"
+            main2.style.filter="blur(15px)";
+            main2.style.pointerEvents="none"
+            // favrte.style.position = "absolute";
+            favrte.style.position = "fixed";
         }
         // console.log(mainObj + " " + typeof mainObj);
         if (mainObj != undefined && mainObj != "N/A") {
@@ -200,7 +205,7 @@ let searchF = () => {
                             <div class="card-body">
                                 <h5 >Movie:- ${data.Title}</h5>
                                 <h6 >Language:- ${data.Language}</h6>
-                                <p class="card-text"> ${data.Plot.slice(0, 100)} <a href="movieDetailPage.html" class="mvpg" style="text-decoration:none;">Read more....</a></p>
+                                <p class="card-text"> ${data.Plot.slice(0, 100)} <a href="movieDetailPage.html" class="mvpg" style="text-decoration:none; color:blue;">Read more....</a></p>
                                 <a href="#" class="btn btn-primary">Add To Favoutite</a>
                             </div>
                     </div>`
@@ -347,13 +352,16 @@ let favShow = function () {
             main[i].style.display = "none"
         }
         div2.style.display = "flex";
-        main2.style.display = "none"
+        // main2.style.display = "none"
+        main2.style.filter="blur(15px)";
+        main2.style.pointerEvents="none"
     } else {
         favrte.innerText = `Favourite`
         favrte.style.background = ""
         favrte.style.border = ""
         if (search.value != "") {
-            favrte.style.position = "absolute";
+            // favrte.style.position = "absolute";
+            favrte.style.position = "fixed";
         } else {
             favrte.style.position = "fixed"
         }
@@ -362,10 +370,14 @@ let favShow = function () {
         for (let i = 0; i < main.length; i++) {
             main[i].style.display = "flex"
         }
-        main2.style.display = "block"
+        // main2.style.display = "block"
+        main2.style.filter="blur(0px)";
+        main2.style.pointerEvents=""
     }
     if (search.value != "") {
-        main2.style.display = "none"
+        // main2.style.display = "none"
+        main2.style.filter="blur(15px)";
+        main2.style.pointerEvents="none"
     }
 
     let deletee = document.getElementsByClassName("delete");
