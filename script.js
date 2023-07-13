@@ -1,4 +1,4 @@
-
+// Declare all the variables.
 let search = document.getElementById("search");
 let year = document.getElementById("year");
 let button = document.getElementById("button");
@@ -23,6 +23,7 @@ let div = document.getElementById("div");
 let div2 = document.getElementById("div2");
 let container = document.getElementsByClassName("container");
 
+// url of all cards of the home page.
 let url2 = "https://www.omdbapi.com/?s=batman&page=1&type=movie&apikey=ae64b988";
 let url3 = "https://www.omdbapi.com/?s=avenger&page=1&type=movie&apikey=ae64b988";
 let url4 = "https://www.omdbapi.com/?s=hulk&page=1&type=movie&apikey=ae64b988";
@@ -45,6 +46,8 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
         // console.log(data2.Search[0].Poster); 
         // console.log(data2.Search); 
         for (let i = 0; i < mainObj.length; i++) {
+
+            // below code is for carousel.
             if (not) {
                 arry.push(`<div class="card ${scrl}" >
                                   <img src="${mainObj[i].Poster}" class="card-img-top tomj" alt="..." width="150px" height="150px" title="${mainObj[i].Title}">
@@ -56,23 +59,23 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
                 container[cont].innerHTML = `${arry[0]}`
 
                 let j = 0;
-                // let k = 0;
+                // code for carousel right button
                 next = () => {
                     j++;
                     if (j > arry.length - 1) {
                         j = 0;
                     }
                     container[cont].innerHTML = `${arry[j]}`
-                    // console.log(k+" next");
                 }
+                // code for carousel left button
                 back = () => {
                     j--;
                     if (j < 0) {
                         j = arry.length - 1;
                     }
                     container[cont].innerHTML = `${arry[j]}`
-                    // console.log(k +" back");
                 }
+                // code for changing carousel card after interval of 5000ms.
                 setInterval(() => {
                     j++;
                     if (j == arry.length) {
@@ -84,6 +87,7 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
                 let left = document.getElementById("left");
                 left.addEventListener("click", back);
             }
+            // below code is for non carousel cards
             else {
 
                 if (data2.Search[i].Poster != "N/A") {
@@ -99,6 +103,8 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
             }
         }
 
+        // below code is for, on click images of the cards some information of the movies should be stored in local storage and then that will reflect to the movie details page
+
         let mvp = document.getElementsByClassName(`${abc}`);
         for (let i = 0; i < mvp.length; i++) {
             mvp[i].onclick = function () {
@@ -109,6 +115,7 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
             }
         }
 
+        // below code is for, on click add favourite button of the cards, the information data of that movies will be saved in local storage.
         let favbtn = document.getElementsByClassName(`${xyz}`);
 
         for (let i = 0; i < favbtn.length; i++) {
@@ -116,25 +123,19 @@ let xmlHttpreq = (url, cont, abc, xyz, scrl, not) => {
                 event.preventDefault();
 
                 addInLocStr.push(data2.Search[i]);
-
+                // below code is for, no two same title movie should be in local storage array or store a unique object inside the local storage array.
                 addInLocStr = [...new Map(addInLocStr.map((m) => [m.Title, m])).values()];
 
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
                 favbtn[i].style.background = "green";
-                favbtn[i].innerHTML = `<span>Added</span> <lord-icon
-                src="https://cdn.lordicon.com/egiwmiit.json"
-                trigger="loop"
-                delay="1000"
-                colors="primary:white"
-                state="morph-check-in"
-                style="width:20px;height:20px">
-                </lord-icon>`;
+                favbtn[i].innerHTML = `<span>Added</span>  <i class="fa-regular fa-circle-check fa-flip"></i>`;
 
                 favbtn[i].removeAttribute("id");
                 favbtn[i].style.gap = "5%";
                 favbtn[i].style.alignItems = "center";
 
                 let k = 0;
+                // below code is for alerting the card added to the favourite.
                 let id = setInterval(() => {
                     idd1 = id;
                     document.getElementsByClassName("alert2")[0].style.display = "none";
@@ -162,6 +163,7 @@ xmlHttpreq(url6, 4, "v", "V", "scroll");
 xmlHttpreq(url7, 5, "vi", "VI", "scroll");
 xmlHttpreq(url2, 6, "i", "I");
 
+// below code or function is for search input box
 let favrte = document.getElementById("favrte");
 let searchF = () => {
     searchVal = search.value;
@@ -188,16 +190,15 @@ let searchF = () => {
             // main2.style.display = "block"
             main2.style.filter="blur(0px)";
             main2.style.pointerEvents="";
-            favrte.style.position = "fixed"
         } else {
             div.style.display = "block";
             // main2.style.display = "none"
             main2.style.filter="blur(15px)";
             main2.style.pointerEvents="none"
-            // favrte.style.position = "absolute";
-            favrte.style.position = "fixed";
         }
         // console.log(mainObj + " " + typeof mainObj);
+
+        // below code is for, whatever movie name anybody type in searchbox that movie's data will be appears inside div.
         if (mainObj != undefined && mainObj != "N/A") {
 
             div.innerHTML = `<div class="card card1" style="width: 18rem;">
@@ -235,14 +236,7 @@ let searchF = () => {
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
                 // console.log(addInLocStr.length);
                 favbtn.style.background = "red";
-                favbtn.innerHTML = `<span>Added</span> <lord-icon
-                src="https://cdn.lordicon.com/egiwmiit.json"
-                trigger="loop"
-                delay="1000"
-                colors="primary:white"
-                state="morph-check-in"
-                style="width:20px;height:20px">
-                </lord-icon>`;
+                favbtn.innerHTML = `<span>Added</span> <i class="fa-regular fa-circle-check fa-flip"></i>`;
 
                 favbtn.style.gap = "5%";
                 favbtn.style.alignItems = "center";
@@ -271,10 +265,12 @@ let searchF = () => {
 
 let main = document.getElementsByClassName("main")
 let y = 0;
+// below function is for, what will happens when anybody clicks on favourite button which is on upper right corner side. 
 let favShow = function () {
     y++;
     if (addInLocStr.length > 0 && y == 1) {
         for (let i = 0; i < addInLocStr.length; i++) {
+            // below code is for, all the cards of the home page because it has less data, so i have to show different type of card for home page's card, inside favourite.
             if (Object.keys(addInLocStr[i]).length == 5) {
                 div2.innerHTML += `<div class="card card2" style="width: 13rem; margin-top: 2rem; justify-content: center;">
                 <a href="movieDetailPage.html" class="mvpgg"> <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="${addInLocStr[i].Title}" width="120px" height="180px" title="${addInLocStr[i].Title}"></a>
@@ -282,29 +278,21 @@ let favShow = function () {
                                         <p><strong>Movie:-</strong><span class="card-title">${addInLocStr[i].Title}</span></p>
                                         <p class="card-text"><strong>Type:-</strong> ${addInLocStr[i].Type}</p>
                                         <p class="card-text"><strong>Release Year:-</strong> ${addInLocStr[i].Year}</p>
-                                        <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete <lord-icon
-                                        src="https://cdn.lordicon.com/kfzfxczd.json"
-                                        trigger="loop"
-                                        delay="2000"
-                                        colors="primary:white"
-                                        style="width:20px;height:20px">
-                                    </lord-icon></a>
+                                        <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete 
+                                        <i class="fa-regular fa-trash-can fa-beat-fade"></i></a>
                                     
                             </div>`
-            } else {
+            } 
+             // below code is for, all the cards of the searchbox because it has more data to show, so i have to show different type of card for searchbox's card, inside favourite.
+            else {
                 div2.innerHTML += `<div class="card card2" style="width: 13rem; margin-top: 2rem; justify-content: center;">
             <a href="movieDetailPage.html" class="mvpgg"> <img src="${addInLocStr[i].Poster}" class="card-img-top" alt="${addInLocStr[i].Title}" width="120px" height="180px" title="${addInLocStr[i].Title}"></a>
                                
                                     <p><strong>Movie:-</strong><span class="card-title">${addInLocStr[i].Title}</span></p>
                                     <p class="card-text"><strong>Country:-</strong> ${addInLocStr[i].Country}</p>
                                     <p class="card-text"><strong>Duration:-</strong> ${addInLocStr[i].Runtime}</p>
-                                    <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete <lord-icon
-                                    src="https://cdn.lordicon.com/kfzfxczd.json"
-                                    trigger="loop"
-                                    delay="2000"
-                                    colors="primary:white"
-                                    style="width:20px;height:20px">
-                                </lord-icon></a>
+                                    <a href="#" class="btn btn-primary delete"  style="width: 5rem;">Delete 
+                                    <i class="fa-regular fa-trash-can fa-beat-fade"></i></a>
                                 
                         </div>`
             }
@@ -312,12 +300,14 @@ let favShow = function () {
             // console.log(Object.keys(addInLocStr[i]));
         }
     }
+    // the below code is for if localstorage does'nt contains any object or movies.
     else if (div2.style.display == "flex") {
         div2.innerHTML = "";
         div2.style.display = "none";
         y = 0;
     }
 
+         // below code is for, on click images of the favourite cards  some information of the movies should be stored in local storage and then that will reflect to the movie details page.
     let mvpgg = document.getElementsByClassName("mvpgg");
 
     for (let i = 0; i < mvpgg.length; i++) {
@@ -335,22 +325,13 @@ let favShow = function () {
     }
 
     if (favrte.innerText == "Favourite") {
-        favrte.innerHTML = `  <lord-icon
-            src="https://cdn.lordicon.com/nhfyhmlt.json"
-            trigger="loop"
-            delay="500"
-            colors="primary:#121331"
-            style="width:50px;height:2.5rem" title="click me">
-        </lord-icon>`;
+        favrte.innerHTML = `<i class="fa-regular fa-circle-xmark fa-shake fa-2xl"></i>`;
         favrte.style.background = "transparent"
         favrte.style.border = "none"
 
-        favrte.style.position = "fixed"
-        favrte.style.top = "60"
-        favrte.style.right = "-13px"
-        for (let i = 0; i < main.length; i++) {
-            main[i].style.display = "none"
-        }
+        search.style.display="none";
+        div.style.display="none";
+        favrte.style.top = "-5px"
         div2.style.display = "flex";
         // main2.style.display = "none"
         main2.style.filter="blur(15px)";
@@ -359,20 +340,16 @@ let favShow = function () {
         favrte.innerText = `Favourite`
         favrte.style.background = ""
         favrte.style.border = ""
-        if (search.value != "") {
-            // favrte.style.position = "absolute";
-            favrte.style.position = "fixed";
-        } else {
-            favrte.style.position = "fixed"
-        }
-        favrte.style.top = "60"
+        search.style.display="";
+        div.style.display="";
+        favrte.style.top = "0px"
         favrte.style.right = "0px"
-        for (let i = 0; i < main.length; i++) {
-            main[i].style.display = "flex"
-        }
         // main2.style.display = "block"
         main2.style.filter="blur(0px)";
         main2.style.pointerEvents=""
+        if(div.innerText=="Incorrect IMDb ID."){
+            div.style.display="none";
+        }
     }
     if (search.value != "") {
         // main2.style.display = "none"
@@ -380,16 +357,20 @@ let favShow = function () {
         main2.style.pointerEvents="none"
     }
 
+    // below code is for delete button 
     let deletee = document.getElementsByClassName("delete");
     let del = function (event) {
         event.preventDefault();
         for (let j = 0; j < deletee.length; j++) {
             deletee[j].onclick = function () {
+                // on click delete button that movie detail object will be spliced out from local storage by using array splice method.
                 addInLocStr.splice(j, 1);
                 localStorage.setItem("arr", JSON.stringify(addInLocStr));
                 // window.location.reload();
+                // on click delete button it div should also remove from the favourite so, below code is for that
                 this.parentNode.remove();
 
+                // below code is for alerting the card deleted from the favourite.
                 let m = 0;
                 let id2 = setInterval(() => {
                     // console.log("delete");
@@ -415,6 +396,7 @@ let favShow = function () {
 
 }
 
+// adding events to the favourite button and input searchbox.
 favrte.addEventListener("click", favShow);
 search.addEventListener("input", searchF)
 
