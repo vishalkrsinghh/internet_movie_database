@@ -61,6 +61,6 @@ See `contributing.md` for ways to get started.
 
 ## Screenshots
 
-![App Screenshot](https://vishalkrsinghh.github.io/stopwatch/index2.html)
+![App Screenshot](ss.gif)
 
 
